@@ -249,8 +249,8 @@ inline static NSString* keyForURL(NSURL* url, NSString* style) {
 		[self handleCompletionsForConnection:connection image:nil error:error];
 		#endif
 	} else {
-		[[EGOCache currentCache] setData:connection.responseData forKey:keyForURL(connection.imageURL,nil) withTimeoutInterval:604800];
-		
+        [[EGOCache currentCache] setImage:anImage forKey:keyForURL(connection.imageURL, nil) withTimeoutInterval:604800];
+
 		[currentConnections removeObjectForKey:connection.imageURL];
 		self.currentConnections = [[currentConnections copy] autorelease];
 		
