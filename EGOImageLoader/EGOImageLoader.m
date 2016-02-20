@@ -192,7 +192,7 @@ inline static NSString* keyForURL(NSURL* url, NSString* style) {
 	} else if(!anImage && styler && style && (anImage = [[EGOCache currentCache] imageForKey:keyForURL(aURL,nil)])) {
 		dispatch_async(kStylerQueue, ^{
 			UIImage* image = styler(anImage);
-			[[EGOCache currentCache] setImage:image forKey:keyForURL(aURL, style) withTimeoutInterval:604800];
+			[[EGOCache currentCache] setImage:image forKey:keyForURL(aURL, style)];
 			dispatch_async(kCompletionsQueue, ^{
 				completion(image, aURL, nil);
 			});
@@ -249,7 +249,7 @@ inline static NSString* keyForURL(NSURL* url, NSString* style) {
 		[self handleCompletionsForConnection:connection image:nil error:error];
 		#endif
 	} else {
-        [[EGOCache currentCache] setImage:anImage forKey:keyForURL(connection.imageURL, nil) withTimeoutInterval:604800];
+        [[EGOCache currentCache] setImage:anImage forKey:keyForURL(connection.imageURL, nil)];
 
 		[currentConnections removeObjectForKey:connection.imageURL];
 		self.currentConnections = [[currentConnections copy] autorelease];
@@ -311,7 +311,7 @@ inline static NSString* keyForURL(NSURL* url, NSString* style) {
 		if(!error && image && styler) {
 			dispatch_async(kStylerQueue, ^{
 				UIImage* anImage = styler(image);
-				[[EGOCache currentCache] setImage:anImage forKey:keyForURL(imageURL, styleKey) withTimeoutInterval:604800];
+				[[EGOCache currentCache] setImage:anImage forKey:keyForURL(imageURL, styleKey)];
 				callCompletions(anImage, [handler objectForKey:kCompletionsKey]);
 			});
 		} else {
